@@ -73,8 +73,10 @@ void MainWindow::loadFilesToDB()
     query.exec("drop table orders");
     query.exec("create table orders(btime int unsigned, etime int unsigned, blng float, blat float, elng float, elat float, fee float)");
 
+    int secondsTo = 1477929600;
+
     auto path = filePathList.at(0);
-//    for(auto path : filePathList){
+    for(auto path : filePathList){
 
         QFile file(path);
         QStringList lines;
@@ -96,12 +98,14 @@ void MainWindow::loadFilesToDB()
                                           .arg(split[1].toUInt()).arg(split[2].toUInt()).arg(split[3].toFloat())
                                           .arg(split[4].toFloat()).arg(split[5].toFloat()).arg(split[6].toFloat()).arg(split[7].toFloat());
                 query.exec(command);
+
+                dataScene->numOfOrders[(split[1].toInt() - secondsTo) / 3600]++;
             }
         } else {
             qDebug() << "Load file error!";
         }
         file.close();
-//    }
+    }
 
     query.exec("select count(*) from orders");
     if(query.next()){
