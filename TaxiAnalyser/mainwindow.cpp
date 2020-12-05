@@ -76,10 +76,12 @@ void MainWindow::loadFilesToDB()
     int secondsTo = 1477929600;
 
     auto path = filePathList.at(0);
-    for(auto path : filePathList){
+//    for(auto path : filePathList){
 
         QFile file(path);
         QStringList lines;
+
+//        int temp_count = 0;
 
         qDebug() << path;
         if(file.open(QIODevice::ReadOnly))
@@ -99,13 +101,27 @@ void MainWindow::loadFilesToDB()
                                           .arg(split[4].toFloat()).arg(split[5].toFloat()).arg(split[6].toFloat()).arg(split[7].toFloat());
                 query.exec(command);
 
+                int gridX = (split[3].toFloat() - 103.908407474531) / 0.031363705;
+                int gridY = (split[4].toFloat() - 30.52408195) / 0.02697961;
+                int gridID = -1;
+                if(gridX >= 0 && gridX < 10 && gridY >= 0 && gridY < 10){
+                    gridID = gridX + gridY * 10;
+                }
+
+//                if(gridID == -1){
+//                    qDebug() << temp_count << split[3].toFloat() << split[4].toFloat();
+//                    temp_count++;
+//                }
                 dataScene->numOfOrders[(split[1].toInt() - secondsTo) / 3600]++;
+                if(gridID != -1) {
+                    dataScene->numOfOrdersPerGridPerHour[gridID][(split[1].toInt() - secondsTo) / 3600]++;
+                }
             }
         } else {
             qDebug() << "Load file error!";
         }
         file.close();
-    }
+//    }
 
     query.exec("select count(*) from orders");
     if(query.next()){
