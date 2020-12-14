@@ -41,7 +41,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QDateEdit" name="dateEdit">
+       <widget class="QDateEdit" name="dateEdit_begin">
         <property name="minimumDateTime">
          <datetime>
           <hour>0</hour>
@@ -67,12 +67,12 @@
          </date>
         </property>
         <property name="displayFormat">
-         <string>yyyy-M-dd</string>
+         <string>yyyy-M-d</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDateEdit" name="dateEdit_2">
+       <widget class="QDateEdit" name="dateEdit_end">
         <property name="maximumDate">
          <date>
           <year>2016</year>
@@ -88,7 +88,7 @@
          </date>
         </property>
         <property name="displayFormat">
-         <string>yyyy-M-dd</string>
+         <string>yyyy-M-d</string>
         </property>
         <property name="date">
          <date>

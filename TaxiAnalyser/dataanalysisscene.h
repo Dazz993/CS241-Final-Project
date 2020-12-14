@@ -21,6 +21,8 @@
 #include <QBarSet>
 #include <QBarCategoryAxis>
 
+#define BASETIME 1477929600
+
 namespace Ui {
 class DataAnalysisScene;
 }
@@ -33,26 +35,32 @@ public:
     explicit DataAnalysisScene(QWidget *parent = nullptr);
     ~DataAnalysisScene();
 
-    QChart * chart = NULL;
-    QChartView * chartView = NULL;
-    QSplineSeries * series = NULL;
-    QDateTimeAxis * axisX = NULL;
-    QValueAxis * axisY = NULL;
+    // Parameters definition
+    bool feeSelected;
+    int beginDayLoaded;
+    int endDayLoaded;
+
+    QChart * splineChart = NULL;
+    QDateTimeAxis * splineAxisX = NULL;
+    QValueAxis * splineAxisY = NULL;
 
     QChart * barChart = NULL;
-    QChartView * barChartView = NULL;
     QBarSeries * barSeries = NULL;
-    QBarSet * barSet = NULL;
-    QBarCategoryAxis *barCatAxis = NULL;
-
+    QBarCategoryAxis * barAxisX = NULL;
+    QValueAxis * barAxisY = NULL;
 
     QLabel * mapLabel = NULL;
 
     QLabel * iconLabel[100];
 
-    void initAnalyseDemmandPattern();
-    void displayInBarSet();
+    void initValues();
+    void initMapLabels();
+
+    void displayInSplineChart();
+    void displayInBarChart();
     void preLoadNumOfOrders();
+
+    void setDayRange();
 
     QPixmap pixmap_choosen;
     QPixmap pixmap_not_choosen;
@@ -62,9 +70,9 @@ public:
 
     bool event(QEvent *e);
 
-    bool flag_numOfOrders;
-    int numOfOrders[24 * 15];
-    int numOfOrdersPerGridPerHour[100][24 * 15];
+    int numOfBeginOrdersPerGridPerHour[100][2 * 24 * 15];
+    int numOfEndOrdersPerGridPerHour[100][2 * 24 * 15];
+
 
 private:
     Ui::DataAnalysisScene *ui;

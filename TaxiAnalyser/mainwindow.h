@@ -19,7 +19,6 @@ public:
 
     // flags
     bool dirLoaded;
-    bool selectFee;
 
     QSqlDatabase db;                                    // Database
     QStringList filePathList;                           // List of the files
