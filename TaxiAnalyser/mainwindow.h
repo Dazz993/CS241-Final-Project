@@ -29,6 +29,12 @@ public:
     void getFileNamesInDir();
     void loadFilesToDB();
 
+    void setProgressBar(int);
+
+signals:
+    void signalLoadFilesDone();
+    void signalProgressBar(int);
+
 private:
     Ui::MainWindow *ui;
 };

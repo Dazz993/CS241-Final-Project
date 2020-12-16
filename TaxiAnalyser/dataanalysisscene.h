@@ -20,6 +20,9 @@
 #include <QBarSeries>
 #include <QBarSet>
 #include <QBarCategoryAxis>
+#include <QSqlDatabase>
+#include <QPieSeries>
+#include <QPieSlice>
 
 #define BASETIME 1477929600
 
@@ -49,16 +52,29 @@ public:
     QBarCategoryAxis * barAxisX = NULL;
     QValueAxis * barAxisY = NULL;
 
+    QChart * travelTimeChart = NULL;
+    QBarSeries * travelTimeSeries = NULL;
+    QBarCategoryAxis * travelTimeAxisX = NULL;
+    QValueAxis * travelTimeAxisY = NULL;
+
     QLabel * mapLabel = NULL;
 
     QLabel * iconLabel[100];
 
+    QSqlDatabase db;
+
     void initValues();
     void initMapLabels();
+    void enableMapLabels();
+    void disableMapLabels();
 
     void displayInSplineChart();
     void displayInBarChart();
     void preLoadNumOfOrders();
+
+    void analyseTravelTime();
+    void analyseFee();
+    void analyseRevenue();
 
     void setDayRange();
 

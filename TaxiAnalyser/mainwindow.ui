@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>312</width>
-    <height>370</height>
+    <width>299</width>
+    <height>338</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,8 +39,21 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Starting Date</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
        <widget class="QDateEdit" name="dateEdit_begin">
         <property name="minimumDateTime">
          <datetime>
@@ -71,7 +84,20 @@
         </property>
        </widget>
       </item>
-      <item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_end_time">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>End Date</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
        <widget class="QDateEdit" name="dateEdit_end">
         <property name="maximumDate">
          <date>
@@ -132,14 +158,37 @@
      </layout>
     </item>
     <item>
-     <widget class="QProgressBar" name="progressBar">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="value">
-       <number>24</number>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_1">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -148,7 +197,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>312</width>
+     <width>299</width>
      <height>22</height>
     </rect>
    </property>

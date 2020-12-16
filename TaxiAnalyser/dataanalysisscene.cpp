@@ -1,12 +1,15 @@
 #include "dataanalysisscene.h"
 #include "ui_dataanalysisscene.h"
 #include <QSizePolicy>
+#include <QSqlError>
 
 DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DataAnalysisScene)
 {
     ui->setupUi(this);
+
+    ui->stackedWidget->setCurrentIndex(0);
 
     initValues();
     initMapLabels();
@@ -72,6 +75,46 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
         }
     });
 
+
+    // Scene 2 - tab 1
+    connect(ui->btn_scene2_analyse, &QPushButton::clicked, [=](){
+        analyseTravelTime();
+    });
+
+    // Scene 2 - tab 2
+    connect(ui->btn_scene2_analyse_2, &QPushButton::clicked, [=](){
+        analyseFee();
+        analyseRevenue();
+    });
+
+
+    // Switch button
+
+    connect(ui->toolButton_0, &QToolButton::clicked, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->page_1);
+        enableMapLabels();
+        qDebug() << ui->stackedWidget->currentIndex();
+
+
+        for(int i = 0; i < 100; i++){
+            auto pixmapReturn = iconLabel[i]->pixmap(Qt::ReturnByValue);
+            if(pixmapReturn == pixmap_choosen){
+                qDebug() << "right";
+            } else {
+                qDebug() << "error";
+            }
+        }
+    });
+
+    connect(ui->toolButton_1, &QToolButton::clicked, [=](){
+        disableMapLabels();
+        ui->stackedWidget->setCurrentWidget(ui->page_2);
+        qDebug() << ui->stackedWidget->currentIndex();
+
+        db = QSqlDatabase::database();
+        qDebug() << db;
+
+    });
 }
 
 void DataAnalysisScene::initValues()
@@ -112,13 +155,377 @@ void DataAnalysisScene::initMapLabels()
         iconLabel[i]->move(x, y);
         iconLabel[i]->setAlignment(Qt::AlignCenter);
         iconLabel[i]->setPixmap(pixmap_choosen);
+        iconLabel[i]->setVisible(true);
     }
 }
+
+void DataAnalysisScene::enableMapLabels(){
+    for(int i = 0; i < 100; i++){
+//        delete iconLabel[i];
+        iconLabel[i]->setVisible(true);
+    }
+}
+
+void DataAnalysisScene::disableMapLabels(){
+    for(int i = 0; i < 100; i++){
+//        delete iconLabel[i];
+        iconLabel[i]->setVisible(false);
+    }
+}
+
+void DataAnalysisScene::analyseTravelTime(){
+    QSqlQuery query(db);
+
+    // travelTime BarChart
+    if(!travelTimeChart){
+        travelTimeChart = new QChart;
+        travelTimeSeries = new QBarSeries;
+        travelTimeChart->addSeries(travelTimeSeries);
+    } else {
+        delete travelTimeAxisX;
+        delete travelTimeAxisY;
+        travelTimeSeries->clear();
+    }
+
+    auto barSet = new QBarSet("The number of order in a period of time");
+    barSet->setColor(QColor(99, 192, 135));
+//    barSet->setColor(QColor(61, 138, 254));
+    travelTimeSeries->append(barSet);
+
+    QStringList cat;
+
+    int date = ui->dateEdit_scene2_date->date().day();
+    int beginUTime = timeToUnixTime(date, ui->timeEdit_scene2_begin_time->time().hour(), ui->timeEdit_scene2_begin_time->time().minute());
+    int endUTime = timeToUnixTime(date, ui->timeEdit_scene2_end_time->time().hour(), ui->timeEdit_scene2_end_time->time().minute());
+
+    if(beginUTime >= endUTime) return;
+
+    int timeStep = ui->spinBox_scene2_timestep->value();
+
+    int maxValue = 0;
+    int count = 0;
+
+    const int NUM_DATA = 600;
+    int data[NUM_DATA];
+    for(int i = 0; i < NUM_DATA; i++){
+        data[i] = 0;
+    }
+
+    qDebug() << beginUTime << endUTime << timeStep;
+
+    auto command = QString("SELECT during / 60 / %3, count(during / 60 / %3) \n"
+                        "FROM orders \n"
+                        "WHERE btime > %1 AND btime < %2 \n"
+                        "GROUP BY during / 60 / %3 \n"
+                        "ORDER BY during / 60 / %3 \n").arg(beginUTime).arg(endUTime).arg(timeStep);
+
+    auto isOK = query.exec(command);
+
+    qDebug() << "isOK?" << isOK << query.lastError().text();
+
+    while(query.next()){
+        qDebug() << query.value(0).toInt() << query.value(1).toInt();
+        data[query.value(0).toInt()] = query.value(1).toInt();
+        count += query.value(1).toInt();
+    }
+
+    std::vector<int> t(data, data + NUM_DATA);
+    std::sort(t.begin(), t.end(), [](int a, int b){
+        return b < a;
+    });
+
+    for(int i = 0; i < 60 / timeStep; i++){
+        cat << QString("%1~%2 ").arg(i * timeStep).arg((i+1) * timeStep);
+        *barSet << data[i] * 100.0 / count;
+        qDebug() << data[i] * 100.0 / count;
+    }
+
+    maxValue = t[0] * 100 / count;
+
+    travelTimeAxisX = new QBarCategoryAxis;
+    travelTimeAxisX->append(cat);
+    travelTimeAxisX->setLabelsFont(QFont("Helvetica", 12));
+    travelTimeAxisX->setLabelsAngle(90);
+    travelTimeAxisX->setGridLineVisible(false);
+    travelTimeAxisX->setTitleText("Travel time period / minutes");
+    travelTimeAxisX->setTitleFont(QFont("Helvetica", 12));
+    travelTimeChart->addAxis(travelTimeAxisX, Qt::AlignBottom);
+    travelTimeSeries->attachAxis(travelTimeAxisX);
+
+    travelTimeAxisY = new QValueAxis;
+    travelTimeAxisY->setLabelsFont(QFont("Helvetica", 13));
+    travelTimeAxisY->setLabelFormat("%d");
+    travelTimeAxisY->setTitleText("Percentage of time period / \%");
+    travelTimeAxisY->setTitleFont(QFont("Helvetica", 12));
+    int rangeMax = 0;
+    if(maxValue < 20){
+        rangeMax = 20;
+    } else if(maxValue < 40){
+        rangeMax = 40;
+    } else if(maxValue < 60){
+        rangeMax = 60;
+    }
+    travelTimeAxisY->setRange(0, rangeMax);
+    travelTimeAxisY->setTickCount(6);
+    travelTimeChart->addAxis(travelTimeAxisY, Qt::AlignLeft);
+    travelTimeSeries->attachAxis(travelTimeAxisY);
+
+//    travelTimeChart->legend()->setVisible(true);
+//    travelTimeChart->legend()->setAlignment(Qt::AlignBottom);
+
+    ui->graphicsView_3->setChart(travelTimeChart);
+
+
+    // travelTime PieChart
+
+    QPieSeries *series = new QPieSeries();
+
+    int first_n_count = 0;
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < NUM_DATA; j++) {
+            if(t[i] == data[j]){
+                series->append(QString("%1~%2 min: %3%").arg(j * timeStep).arg((j+1) * timeStep).arg(QString::number(t[i] * 100.0 / count, 'f', 2)), t[i] * 100.0 / count);
+                first_n_count += t[i];
+                break;
+            }
+        }
+//        QPieSlice *slice = series->slices().at(i);
+//        slice->setExploded();
+//        slice->setLabelVisible();
+    }
+    series->append("Other", (count - first_n_count) * 100.0 / count);
+
+    QPieSlice *slice = series->slices().at(0);
+    slice->setExploded();
+    slice->setLabelVisible();
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    chart->setTitle("Pie Chart");
+    chart->setTitleFont(QFont("Tahoma", 14));
+    chart->legend()->setAlignment(Qt::AlignRight);
+    chart->legend()->setContentsMargins(0,0,0,0);
+    chart->legend()->setWindowFrameMargins(0,0,0,0);
+//    chart->legend()->hide();
+
+    ui->graphicsView_4->setChart(chart);
+    ui->graphicsView_4->setRenderHint(QPainter::Antialiasing);
+}
+
+void DataAnalysisScene::analyseFee()
+{
+    auto chart = new QChart;
+    auto barSeries = new QBarSeries;
+    chart->addSeries(barSeries);
+
+    auto barSet = new QBarSet("The number of order in a period of time");
+    barSet->setColor(QColor(99, 192, 135));
+//    barSet->setColor(QColor(61, 138, 254));
+    barSeries->append(barSet);
+
+    QStringList cat;
+
+    int date = ui->dateEdit_scene2_date_2->date().day();
+    int beginUTime = timeToUnixTime(date, ui->timeEdit_scene2_begin_time_2->time().hour(), ui->timeEdit_scene2_begin_time_2->time().minute());
+    int endUTime = timeToUnixTime(date, ui->timeEdit_scene2_end_time_2->time().hour(), ui->timeEdit_scene2_end_time_2->time().minute());
+
+    if(beginUTime >= endUTime) return;
+
+    int nParts = 25;
+
+    int maxValue = 0;
+    int count = 0;
+
+    const int NUM_DATA = 100;
+    int data[NUM_DATA];
+    for(int i = 0; i < NUM_DATA; i++){
+        data[i] = 0;
+    }
+
+    qDebug() << beginUTime << endUTime << nParts;
+
+    QSqlQuery query(db);
+
+    auto command = QString("SELECT round(fee), count(round(fee)) \n"
+                        "FROM orders \n"
+                        "WHERE btime > %1 AND btime < %2 \n"
+                        "GROUP BY round(fee) \n"
+                        "ORDER BY round(fee) \n").arg(beginUTime).arg(endUTime);
+
+    auto isOK = query.exec(command);
+
+    qDebug() << "isOK?" << isOK << query.lastError().text();
+
+    while(query.next()){
+        qDebug() << query.value(0).toInt() << query.value(1).toInt();
+        data[query.value(0).toInt()] = query.value(1).toInt();
+        count += query.value(1).toInt();
+    }
+
+    std::vector<int> t(data, data + NUM_DATA);
+    std::sort(t.begin(), t.end(), [](int a, int b){
+        return b < a;
+    });
+
+    for(int i = 0; i < nParts; i++){
+        if(i == 0){
+            cat << QString("0~0.5");
+        } else if(i == nParts - 1){
+            cat << QString(">=%1").arg(i+0.5);
+        } else {
+            cat << QString("%1~%2").arg(i-0.5).arg(i+0.5);
+        }
+        *barSet << data[i] * 100.0 / count;
+        qDebug() << data[i] * 100.0 / count;
+    }
+
+    maxValue = t[0] * 100 / count;
+
+    auto AxisX = new QBarCategoryAxis;
+    AxisX->append(cat);
+    AxisX->setLabelsFont(QFont("Helvetica", 12));
+    AxisX->setLabelsAngle(90);
+    AxisX->setGridLineVisible(false);
+    AxisX->setTitleText("Travel time period / minutes");
+    AxisX->setTitleFont(QFont("Helvetica", 12));
+    chart->addAxis(AxisX, Qt::AlignBottom);
+    barSeries->attachAxis(AxisX);
+
+    auto AxisY = new QValueAxis;
+    AxisY->setLabelsFont(QFont("Helvetica", 13));
+    AxisY->setLabelFormat("%d");
+    AxisY->setTitleText("Percentage of time period / \%");
+    AxisY->setTitleFont(QFont("Helvetica", 12));
+    int rangeMax = 0;
+    if(maxValue < 20){
+        rangeMax = 20;
+    } else if(maxValue < 40){
+        rangeMax = 40;
+    } else if(maxValue < 60){
+        rangeMax = 60;
+    }
+    AxisY->setRange(0, rangeMax);
+    AxisY->setTickCount(6);
+    chart->addAxis(AxisY, Qt::AlignLeft);
+    barSeries->attachAxis(AxisY);
+
+//    travelTimeChart->legend()->setVisible(true);
+//    travelTimeChart->legend()->setAlignment(Qt::AlignBottom);
+
+    ui->graphicsView_6->setChart(chart);
+}
+
+void DataAnalysisScene::analyseRevenue()
+{
+    auto chart = new QChart;
+    auto barSeries = new QBarSeries;
+    chart->addSeries(barSeries);
+
+    auto barSet = new QBarSet("The number of order in a period of time");
+//    barSet->setColor(QColor(99, 192, 135));
+    barSet->setColor(QColor(61, 138, 254));
+    barSeries->append(barSet);
+
+    QStringList cat;
+
+    int date = ui->dateEdit_scene2_date_2->date().day();
+    int beginUTime = timeToUnixTime(date, ui->timeEdit_scene2_begin_time_2->time().hour(), ui->timeEdit_scene2_begin_time_2->time().minute());
+    int endUTime = timeToUnixTime(date, ui->timeEdit_scene2_end_time_2->time().hour(), ui->timeEdit_scene2_end_time_2->time().minute());
+
+    if(beginUTime >= endUTime) return;
+
+    int stepTime = ui->spinBox_scene2_n_parts->value() * 60;
+
+    int maxValue = 0;
+    int count = 0;
+
+    const int NUM_DATA = 100;
+    int data[NUM_DATA];
+    for(int i = 0; i < NUM_DATA; i++){
+        data[i] = 0;
+    }
+
+    qDebug() << beginUTime << endUTime << stepTime;
+
+    QSqlQuery query(db);
+
+    QString subItem = QString("(btime - %1) / %2").arg(beginUTime).arg(stepTime);
+
+    auto command = QString("SELECT %1, count(fee) \n"
+                            "FROM orders \n"
+                            "WHERE btime > %2 AND btime < %3 \n"
+                            "GROUP BY %1 \n"
+                            "ORDER BY %1 \n").arg(subItem).arg(beginUTime).arg(endUTime);
+
+    auto isOK = query.exec(command);
+
+    qDebug() << query.lastQuery();
+
+    qDebug() << "isOK?" << isOK << query.lastError().text();
+
+    while(query.next()){
+        qDebug() << "OUTPUT" << query.value(0).toFloat() << query.value(1).toFloat();
+        data[query.value(0).toInt()] = query.value(1).toInt();
+        count += query.value(1).toInt();
+    }
+
+    std::vector<int> t(data, data + NUM_DATA);
+    std::sort(t.begin(), t.end(), [](int a, int b){
+        return b < a;
+    });
+
+    for(int i = 0; i < (endUTime - beginUTime) / stepTime + 1; i++){
+        QTime beginTime = unixTimeToTime(beginUTime + i * stepTime).time();
+        QTime endTime = unixTimeToTime(std::min(endUTime, beginUTime + (i+1) * stepTime)).time();
+
+        if(beginTime == endTime) break;
+
+        cat << QString("%1:%2~%3:%4").arg(beginTime.hour(), 2, 10, QLatin1Char('0')).arg(beginTime.minute(), 2, 10, QLatin1Char('0')).arg(endTime.hour(), 2, 10, QLatin1Char('0')).arg(endTime.minute(), 2, 10, QLatin1Char('0'));
+        *barSet << data[i];
+        qDebug() << data[i];
+    }
+
+    maxValue = t[0];
+
+    auto AxisX = new QBarCategoryAxis;
+    AxisX->append(cat);
+    AxisX->setLabelsFont(QFont("Helvetica", 12));
+    AxisX->setLabelsAngle(90);
+    AxisX->setGridLineVisible(false);
+    AxisX->setTitleText("Travel time period / minutes");
+    AxisX->setTitleFont(QFont("Helvetica", 12));
+    chart->addAxis(AxisX, Qt::AlignBottom);
+    barSeries->attachAxis(AxisX);
+
+    auto AxisY = new QValueAxis;
+    AxisY->setLabelsFont(QFont("Helvetica", 13));
+    AxisY->setLabelFormat("%d");
+    AxisY->setTitleText("Percentage of time period / \%");
+    AxisY->setTitleFont(QFont("Helvetica", 12));
+    int rangeMax = 0;
+    if(maxValue < 5000){
+        rangeMax = 5000;
+    } else if(maxValue < 10000){
+        rangeMax = 10000;
+    } else if(maxValue < 20000){
+        rangeMax = 20000;
+    }
+    AxisY->setRange(0, rangeMax);
+    AxisY->setTickCount(6);
+    chart->addAxis(AxisY, Qt::AlignLeft);
+    barSeries->attachAxis(AxisY);
+
+//    travelTimeChart->legend()->setVisible(true);
+//    travelTimeChart->legend()->setAlignment(Qt::AlignBottom);
+
+    ui->graphicsView_5->setChart(chart);
+}
+
 
 bool DataAnalysisScene::event(QEvent *e)
 {
     //如果是鼠标按下 ，在event事件分发中做拦截操作
-    if(e->type() == QEvent::MouseButtonPress)
+    if(e->type() == QEvent::MouseButtonPress && ui->stackedWidget->currentIndex() == 0)
     {
         QMouseEvent * ev  = static_cast<QMouseEvent *>(e);
 
@@ -280,7 +687,7 @@ void DataAnalysisScene::displayInSplineChart()
     } else if (maxValue < 300000){
         maxAxisYValue = 300000;
     } else {
-        maxAxisYValue = 450000;
+        maxAxisYValue = 500000;
     }
     splineAxisY->setRange(0, maxAxisYValue);
     splineAxisY->setLabelFormat("%d");

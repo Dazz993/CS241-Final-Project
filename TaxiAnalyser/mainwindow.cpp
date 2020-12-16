@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QMessageBox>
 #include <QSqlRecord>
+#include <QThread>
 #include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,6 +20,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     initDatabase();
 
+
+    connect(this, &MainWindow::signalProgressBar, this, [=](int n){
+        ui->progressBar->setValue(n);
+        ui->label_1->setText(QString("%1%").arg(n));
+    });
+
+//    connect(this, &MainWindow::signalProgressBar, ui->progressBar, &QProgressBar::setValue);
+//    connect(this, SIGNAL(signalProgressBar(int)), ui->label_1, SLOT(setNum(int)));
+
+    connect(this, &MainWindow::signalProgressBar, [=](){
+        qDebug() << "get signal";
+    });
 
     connect(ui->btn_select_dir, &QPushButton::clicked, [=](){
         getFileNamesInDir();
@@ -35,23 +48,42 @@ MainWindow::MainWindow(QWidget *parent)
             dataScene->setDayRange();
 
             if(dirLoaded){
-                loadFilesToDB();
+                auto thread = QThread::create([=](){
+//                    connect(this, &MainWindow::signalProgressBar, this, &MainWindow::setProgressBar);
+
+                    loadFilesToDB();
+                    emit signalLoadFilesDone();
+                });
+                thread->start();
             }
 
-            QTimer::singleShot(500, this, [=](){
-                this->hide();
-                dataScene->show();
-            });
         } else {
             QMessageBox::critical(this, "Error!", "The starting day should not be later than the ending day!");
         }
     });
+
+    connect(this, &MainWindow::signalLoadFilesDone, [=](){
+        QTimer::singleShot(500, this, [=](){
+            this->hide();
+            dataScene->show();
+        });
+    });
+
+
+    emit signalProgressBar(0);
 }
+
+void MainWindow::setProgressBar(int n)
+{
+    qDebug() << n;
+}
+
 
 void MainWindow::initDatabase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(":memory:");
+    db.setConnectOptions("QSQLITE_OPEN_URI;QSQLITE_ENABLE_SHARED_CACHE");
     if(!db.open()){
         QMessageBox::critical(this, "Can't open database", "unable to establish a database connection", QMessageBox::Cancel);
     }
@@ -77,23 +109,28 @@ void MainWindow::getFileNamesInDir()
 
 void MainWindow::loadFilesToDB()
 {
-    QSqlQuery query;
+//    db = QSqlDatabase::addDatabase("QSQLITE", "LoadFiles");
+//    db.setDatabaseName(":memory:");
+//    db.setConnectOptions("QSQLITE_OPEN_URI;QSQLITE_ENABLE_SHARED_CACHE");
+//    db.open();
+
+    QSqlQuery query(db);
     query.exec("drop table orders");
 
     if(dataScene->feeSelected){
-        query.exec("create table orders(btime int unsigned, etime int unsigned, blng float, blat float, elng float, elat float, fee float)");
+        query.exec("create table orders(btime int unsigned, during int unsigned, blng float, blat float, elng float, elat float, fee float)");
     } else {
-        query.exec("create table orders(btime int unsigned, etime int unsigned, blng float, blat float, elng float, elat float)");
+        query.exec("create table orders(btime int unsigned, during int unsigned, blng float, blat float, elng float, elat float)");
     }
 
     int secondsTo = 1477929600;
-
-    auto path = filePathList.at(0);
 
     int beginDay = ui->dateEdit_begin->date().day();
     int endDay = ui->dateEdit_end->date().day();
 
     qDebug() << beginDay << endDay;
+
+    int i = 0, j = 0;
 
     for(int i = beginDay - 1; i < endDay; i++){
         for(int j = 0; j < 5; j++){
@@ -122,11 +159,11 @@ void MainWindow::loadFilesToDB()
                     QString command;
                     if(dataScene->feeSelected){
                         command = QString("insert into orders values(%1, %2, %3, %4, %5, %6, %7)")
-                                                  .arg(split[1].toUInt()).arg(split[2].toUInt()).arg(split[3].toFloat())
+                                                  .arg(split[1].toUInt()).arg(split[2].toUInt() - split[1].toUInt()).arg(split[3].toFloat())
                                                   .arg(split[4].toFloat()).arg(split[5].toFloat()).arg(split[6].toFloat()).arg(split[7].toFloat());
                     } else {
                         command = QString("insert into orders values(%1, %2, %3, %4, %5, %6)")
-                                                  .arg(split[1].toUInt()).arg(split[2].toUInt()).arg(split[3].toFloat())
+                                                  .arg(split[1].toUInt()).arg(split[2].toUInt() - split[1].toUInt()).arg(split[3].toFloat())
                                                   .arg(split[4].toFloat()).arg(split[5].toFloat()).arg(split[6].toFloat());
                     }
 
@@ -161,10 +198,12 @@ void MainWindow::loadFilesToDB()
                 qDebug() << "Load file error!";
             }
             file.close();
+
+            emit signalProgressBar( int( (i * 5.0 + j) / (endDay - beginDay + 1) / 5 * 100 ));
         }
     }
 
-
+    query.exec("create index timespan on orders(btime, during)");
 
     query.exec("select count(*) from orders");
     if(query.next()){
@@ -173,7 +212,6 @@ void MainWindow::loadFilesToDB()
     } else {
         qDebug() << "Error!";
     }
-
 }
 
 MainWindow::~MainWindow()
