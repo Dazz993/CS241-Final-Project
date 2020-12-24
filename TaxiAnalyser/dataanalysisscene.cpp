@@ -2,6 +2,7 @@
 #include "ui_dataanalysisscene.h"
 #include <QSizePolicy>
 #include <QSqlError>
+#include <QButtonGroup>
 
 DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
     QMainWindow(parent),
@@ -88,6 +89,51 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
     });
 
 
+    // Scene 3 - tab 1
+    connect(ui->pushButton_query_similiar_orders, &QPushButton::clicked, this, [=](){
+        ui->graphicsView_7->setPoints(ui->checkBox_use_depa_pos->isChecked(), ui->checkBox_use_end_pos->isChecked(), ui->doubleSpinBox_depa_lon->value(), \
+                                      ui->doubleSpinBox_depa_lat->value(), ui->doubleSpinBox_end_lon->value(), ui->doubleSpinBox_end_lat->value());
+        ui->listView->queryCommand(ui->checkBox_use_depa_pos->isChecked(), ui->checkBox_use_end_pos->isChecked(), ui->checkBox_use_depa_time->isChecked(), ui->checkBox_use_end_time->isChecked(), \
+                                   ui->checkBox_use_fee->isChecked(), ui->doubleSpinBox_depa_lon->value(), ui->doubleSpinBox_depa_lat->value(), ui->doubleSpinBox_end_lon->value(), ui->doubleSpinBox_end_lat->value(), \
+                                   ui->dateTimeEdit->dateTime(), ui->dateTimeEdit_2->dateTime(), ui->doubleSpinBox_fee->value(), ui->comboBox_similarity->currentText());
+    });
+
+    // Scene 3 - tab 2
+
+    ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                  ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+
+    connect(ui->pushButton_query_predict_1, &QPushButton::clicked, this, [=](){
+        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+
+
+        ui->graphicsView_9->predictDuringTime(ui->checkBox_use_depa_time_2->isChecked(), ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_depa_lon_2->value(), \
+                                              ui->doubleSpinBox_end_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->dateTimeEdit_3->dateTime());
+    });
+
+    connect(ui->doubleSpinBox_depa_lat_2, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](){
+        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+    });
+
+    connect(ui->doubleSpinBox_depa_lon_2, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](){
+        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+    });
+
+    connect(ui->doubleSpinBox_end_lat_2, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](){
+        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+    });
+
+    connect(ui->doubleSpinBox_end_lon_2, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](){
+        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
+                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+    });
+
+
+
     // Switch button
 
     connect(ui->toolButton_0, &QToolButton::clicked, [=](){
@@ -115,6 +161,13 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
         qDebug() << db;
 
     });
+
+    connect(ui->toolButton_2, &QToolButton::clicked, [=](){
+        disableMapLabels();
+        ui->stackedWidget->setCurrentWidget(ui->page_3);
+
+        querySimilarOrders();
+    });
 }
 
 void DataAnalysisScene::initValues()
@@ -134,6 +187,8 @@ void DataAnalysisScene::initMapLabels()
 {
     ui->label_tag1_map->setPixmap(QPixmap(":/figs/final_map2.png").scaled(600, 600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     ui->label_tag2_map->setPixmap(QPixmap(":/figs/final_map2.png").scaled(600, 600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    map = QPixmap::fromImage(QImage(":/figs/map_chengdu.png").scaled(580, 580, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
     pixmap_choosen = QPixmap(":/figs/tick.png").scaled(15, 15, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     pixmap_not_choosen = QPixmap(":/figs/not_tick.png").scaled(15, 15, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -157,6 +212,13 @@ void DataAnalysisScene::initMapLabels()
         iconLabel[i]->setPixmap(pixmap_choosen);
         iconLabel[i]->setVisible(true);
     }
+}
+
+void DataAnalysisScene::querySimilarOrders()
+{
+    qDebug() << "show!!";
+//    ui->label_6->setPixmap(map);
+//    ui->label_6->setVisible(true);
 }
 
 void DataAnalysisScene::enableMapLabels(){
@@ -889,6 +951,27 @@ void DataAnalysisScene::setDayRange(){
     ui->dateEdit_tag1_begin->setMaximumDate(QDate(2016, 11, endDayLoaded));
     ui->dateEdit_tag1_end->setMinimumDate(QDate(2016, 11, beginDayLoaded));
     ui->dateEdit_tag1_end->setMaximumDate(QDate(2016, 11, endDayLoaded));
+
+    ui->dateTimeEdit->setMinimumDate(QDate(2016, 11, beginDayLoaded));
+    ui->dateTimeEdit->setMaximumDate(QDate(2016, 11, endDayLoaded));
+    ui->dateTimeEdit->setMinimumTime(QTime(0, 0));
+    ui->dateTimeEdit->setMaximumTime(QTime(23, 59));
+    ui->dateTimeEdit->setTime(QTime(0 ,0));
+
+    ui->dateTimeEdit_2->setMinimumDate(QDate(2016, 11, beginDayLoaded));
+    ui->dateTimeEdit_2->setMaximumDate(QDate(2016, 11, endDayLoaded));
+    ui->dateTimeEdit_2->setMinimumTime(QTime(0, 0));
+    ui->dateTimeEdit_2->setMaximumTime(QTime(23, 59, 59));
+    ui->dateTimeEdit_2->setTime(QTime(1, 0));
+}
+
+void DataAnalysisScene::initWidgets()
+{
+    auto buttonGroupPredictingTime = new QButtonGroup(this);
+    buttonGroupPredictingTime->setExclusive(true);
+    buttonGroupPredictingTime->addButton(ui->radioButton_1_1);
+    buttonGroupPredictingTime->addButton(ui->radioButton_1_2);
+    buttonGroupPredictingTime->addButton(ui->radioButton_1_3);
 }
 
 QDateTime DataAnalysisScene::unixTimeToTime(int uTime)

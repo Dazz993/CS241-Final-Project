@@ -87,15 +87,18 @@ Information
     </item>
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_1">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_2">
            <attribute name="title">
@@ -1093,6 +1096,632 @@ Information
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="page_3">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QTabWidget" name="tabWidget_2">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab_5">
+           <attribute name="title">
+            <string>Tab 1</string>
+           </attribute>
+           <widget class="mapView" name="graphicsView_8">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>70</y>
+              <width>602</width>
+              <height>611</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="predictDuringView" name="graphicsView_9">
+            <property name="geometry">
+             <rect>
+              <x>680</x>
+              <y>140</y>
+              <width>861</width>
+              <height>551</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="label_7">
+            <property name="geometry">
+             <rect>
+              <x>680</x>
+              <y>100</y>
+              <width>851</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="text">
+             <string>Time cost from the origin to the destination:</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::RichText</enum>
+            </property>
+            <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>10</y>
+              <width>1541</width>
+              <height>51</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Depature position</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat_2">
+                 <property name="suffix">
+                  <string>° N</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>30.524000000000001</double>
+                 </property>
+                 <property name="maximum">
+                  <double>30.794000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon_2">
+                 <property name="suffix">
+                  <string>° E</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>103.909000000000006</double>
+                 </property>
+                 <property name="maximum">
+                  <double>104.221999999999994</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>End position</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat_2">
+                 <property name="suffix">
+                  <string>° N</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>30.524000000000001</double>
+                 </property>
+                 <property name="maximum">
+                  <double>30.794000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon_2">
+                 <property name="suffix">
+                  <string>° E</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>103.909000000000006</double>
+                 </property>
+                 <property name="maximum">
+                  <double>104.221999999999994</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="checkBox_use_depa_time_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Use depature time</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="dateTimeEdit_3">
+                 <property name="date">
+                  <date>
+                   <year>2016</year>
+                   <month>11</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                 <property name="displayFormat">
+                  <string>yyyy/M/d hh:mm</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_query_predict_1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Predict</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>680</x>
+              <y>70</y>
+              <width>861</width>
+              <height>21</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <item>
+              <widget class="QRadioButton" name="radioButton_1_1">
+               <property name="text">
+                <string>Use mouse to choose depature position</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_1_2">
+               <property name="text">
+                <string>Use mouse to choose end position</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radioButton_1_3">
+               <property name="text">
+                <string>Not use mouse to choose</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="tab_6">
+           <attribute name="title">
+            <string>Tab 2</string>
+           </attribute>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>10</y>
+              <width>1531</width>
+              <height>84</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="checkBox_use_depa_pos">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Use depature position</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat">
+                 <property name="suffix">
+                  <string>° N</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>30.524000000000001</double>
+                 </property>
+                 <property name="maximum">
+                  <double>30.794000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon">
+                 <property name="suffix">
+                  <string>° E</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>103.909000000000006</double>
+                 </property>
+                 <property name="maximum">
+                  <double>104.221999999999994</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="checkBox_use_end_pos">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Use end position</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat">
+                 <property name="suffix">
+                  <string>° N</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>30.524000000000001</double>
+                 </property>
+                 <property name="maximum">
+                  <double>30.794000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon">
+                 <property name="suffix">
+                  <string>° E</string>
+                 </property>
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>103.909000000000006</double>
+                 </property>
+                 <property name="maximum">
+                  <double>104.221999999999994</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>80</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="checkBox_use_depa_time">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Use depature time</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QDateTimeEdit" name="dateTimeEdit">
+                 <property name="date">
+                  <date>
+                   <year>2016</year>
+                   <month>11</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                 <property name="displayFormat">
+                  <string>yyyy/M/d hh:mm</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="checkBox_use_end_time">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Use end time</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDateTimeEdit" name="dateTimeEdit_2">
+                 <property name="date">
+                  <date>
+                   <year>2016</year>
+                   <month>11</month>
+                   <day>1</day>
+                  </date>
+                 </property>
+                 <property name="time">
+                  <time>
+                   <hour>0</hour>
+                   <minute>0</minute>
+                   <second>7</second>
+                  </time>
+                 </property>
+                 <property name="displayFormat">
+                  <string>yyyy/M/d hh:mm</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>80</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QCheckBox" name="checkBox_use_fee">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Use fee</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox_fee">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="suffix">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_similarity">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Similarity level</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_similarity">
+                   <item>
+                    <property name="text">
+                     <string>High</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Middle</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Low</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>80</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_query_similiar_orders">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>QUERY</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="queryTableView" name="listView">
+            <property name="geometry">
+             <rect>
+              <x>690</x>
+              <y>90</y>
+              <width>841</width>
+              <height>621</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+           <widget class="mapView" name="graphicsView_7">
+            <property name="geometry">
+             <rect>
+              <x>50</x>
+              <y>90</y>
+              <width>602</width>
+              <height>611</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -1113,7 +1742,22 @@ Information
   <customwidget>
    <class>QChartView</class>
    <extends>QGraphicsView</extends>
-   <header>qchartview.h</header>
+   <header location="global">qchartview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mapView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">mapview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>queryTableView</class>
+   <extends>QListView</extends>
+   <header>querytableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>predictDuringView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">predictduringview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

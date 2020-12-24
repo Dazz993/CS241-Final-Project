@@ -12,16 +12,25 @@ SOURCES += \
     dataanalysisscene.cpp \
     main.cpp \
     mainwindow.cpp \
+    mapview.cpp \
+    predictduringview.cpp \
+    querytableview.cpp \
     taxiorder.cpp
 
 HEADERS += \
     dataanalysisscene.h \
     mainwindow.h \
+    mapview.h \
+    predictduringview.h \
+    querytableview.h \
     taxiorder.h
 
 FORMS += \
     dataanalysisscene.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    mapview.ui \
+    predictduringview.ui \
+    querytableview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

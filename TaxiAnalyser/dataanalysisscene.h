@@ -76,10 +76,13 @@ public:
     void analyseFee();
     void analyseRevenue();
 
+    void querySimilarOrders();
+
     void setDayRange();
 
     QPixmap pixmap_choosen;
     QPixmap pixmap_not_choosen;
+    QPixmap map;
 
     static QDateTime unixTimeToTime(int uTime);
     static int timeToUnixTime(int day, int hour = 0, int min = 0, int second = 0);
@@ -90,6 +93,7 @@ public:
     int numOfEndOrdersPerGridPerHour[100][2 * 24 * 15];
 
 
+    void initWidgets();
 private:
     Ui::DataAnalysisScene *ui;
 };

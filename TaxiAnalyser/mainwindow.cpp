@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     initDatabase();
 
-
     connect(this, &MainWindow::signalProgressBar, this, [=](int n){
         ui->progressBar->setValue(n);
         ui->label_1->setText(QString("%1%").arg(n));

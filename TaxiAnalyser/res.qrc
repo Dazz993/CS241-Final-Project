@@ -4,5 +4,8 @@
         <file>figs/final_map2.png</file>
         <file>figs/not_tick.png</file>
         <file>figs/tick.png</file>
+        <file>figs/end_point.png</file>
+        <file>figs/start_point.png</file>
+        <file>figs/map_chengdu.png</file>
     </qresource>
 </RCC>
