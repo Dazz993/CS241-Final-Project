@@ -105,10 +105,6 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
                                   ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
 
     connect(ui->pushButton_query_predict_1, &QPushButton::clicked, this, [=](){
-        ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
-                                      ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
-
-
         ui->graphicsView_9->predictDuringTime(ui->checkBox_use_depa_time_2->isChecked(), ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_depa_lon_2->value(), \
                                               ui->doubleSpinBox_end_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->dateTimeEdit_3->dateTime());
     });

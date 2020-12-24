@@ -24,14 +24,14 @@ void mapView::setPoints(bool start, bool end, double slon, double slat,  double 
     double ey = (588.0 - 23.0) / (30.524 - 30.794) * (elat - 30.794) + 23 - 11;
 
     if(start){
-        startLabel.move(sx - startPixmap.width() / 2, sy - startPixmap.height() / 2);
+        startLabel.move(sx - startPixmap.width() / 2, sy - startPixmap.height());
         startLabel.setVisible(true);
     } else {
         startLabel.setVisible(false);
     }
 
     if(end){
-        endLabel.move(ex - endPixmap.width() / 2, ey - endPixmap.height() / 2);
+        endLabel.move(ex - endPixmap.width() / 2, ey - endPixmap.height());
         endLabel.setVisible(true);
     } else {
         endLabel.setVisible(false);
@@ -116,11 +116,11 @@ void mapView::mousePressEvent(QMouseEvent *event)
     if(status == 0){
         return;
     } else if(status == 1){
-        startLabel.move(event->x() - startPixmap.width() / 2, event->y() - endPixmap.height());
         emit startPosChanged(lat, lng);
+        startLabel.move(event->x() - startPixmap.width() / 2, event->y() - startPixmap.height());
     } else if(status == 2){
-        endLabel.move(event->x() - endPixmap.width() / 2, event->y() - endPixmap.height());
         emit endPosChanged(lat, lng);
+        endLabel.move(event->x() - endPixmap.width() / 2, event->y() - startPixmap.height());
     }
 }
 
