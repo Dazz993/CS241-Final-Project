@@ -14,6 +14,7 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
 
     initValues();
     initMapLabels();
+    initWidgets();
 
     // Scene 1 - tag 1
     // display chart
@@ -130,6 +131,38 @@ DataAnalysisScene::DataAnalysisScene(QWidget *parent) :
     connect(ui->doubleSpinBox_end_lon_2, QOverload<double>::of(&QDoubleSpinBox::valueChanged), [=](){
         ui->graphicsView_8->setPoints(true, true, ui->doubleSpinBox_depa_lon_2->value(), \
                                       ui->doubleSpinBox_depa_lat_2->value(), ui->doubleSpinBox_end_lon_2->value(), ui->doubleSpinBox_end_lat_2->value());
+    });
+
+    connect(ui->radioButton_1_1, &QRadioButton::clicked, this, [=](){
+        ui->graphicsView_8->setStatus(1);
+    });
+
+    connect(ui->radioButton_1_2, &QRadioButton::clicked, this, [=](){
+        ui->graphicsView_8->setStatus(2);
+    });
+
+    connect(ui->radioButton_1_3, &QRadioButton::clicked, this, [=](){
+        ui->graphicsView_8->setStatus(0);
+    });
+
+    connect(ui->graphicsView_8, &mapView::startPosChanged, this, [=](double lat, double lng){
+        ui->doubleSpinBox_depa_lat_2->setValue(lat);
+        ui->doubleSpinBox_depa_lon_2->setValue(lng);
+    });
+
+    connect(ui->graphicsView_8, &mapView::endPosChanged, this, [=](double lat, double lng){
+        ui->doubleSpinBox_end_lat_2->setValue(lat);
+        ui->doubleSpinBox_end_lon_2->setValue(lng);
+    });
+
+
+    // Predict the destination
+    connect(ui->pushButton_query_predict_destination, &QPushButton::clicked, this, [=](){
+        ui->graphicsView_14->setHeatMapFlag(true);
+        ui->graphicsView_14->addPoints(95, 95, 1);
+        ui->graphicsView_14->addPoints(106, 106, 1);
+        ui->graphicsView_14->addPoints(100, 100, 1);
+        ui->graphicsView_14->displayHeatMap();
     });
 
 
@@ -972,6 +1005,14 @@ void DataAnalysisScene::initWidgets()
     buttonGroupPredictingTime->addButton(ui->radioButton_1_1);
     buttonGroupPredictingTime->addButton(ui->radioButton_1_2);
     buttonGroupPredictingTime->addButton(ui->radioButton_1_3);
+
+    startPixmap = QPixmap::fromImage(QImage(":/figs/start_point.png"));
+    ui->label_start_pixmap_1->setPixmap(startPixmap);
+//    ui->label_start_pixmap_1->resize(startPixmap.width(), startPixmap.height());
+
+    endPixmap = QPixmap::fromImage(QImage(":/figs/end_point.png"));
+    ui->label_end_pixmap_1->setPixmap(endPixmap);
+//    ui->label_end_pixmap_1->resize(startPixmap.width(), startPixmap.height());
 }
 
 QDateTime DataAnalysisScene::unixTimeToTime(int uTime)

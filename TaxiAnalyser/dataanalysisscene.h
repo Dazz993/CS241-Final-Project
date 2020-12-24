@@ -84,6 +84,9 @@ public:
     QPixmap pixmap_not_choosen;
     QPixmap map;
 
+    QPixmap startPixmap;
+    QPixmap endPixmap;
+
     static QDateTime unixTimeToTime(int uTime);
     static int timeToUnixTime(int day, int hour = 0, int min = 0, int second = 0);
 
