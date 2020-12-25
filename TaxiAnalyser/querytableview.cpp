@@ -24,8 +24,8 @@ void queryTableView::queryCommand(bool startPos, bool endPos, bool startTime, bo
 {
     model->clear();
 
-    double lonDelta = 0.05;
-    double latDelta = 0.05;
+    double lonDelta = 0.02;
+    double latDelta = 0.03;
     double timeDelta = 300;
     double feeDelta = 1.5;
 
@@ -81,7 +81,7 @@ void queryTableView::queryCommand(bool startPos, bool endPos, bool startTime, bo
     }
 
     QString command = "select * from orders where " + _startPosCons + _endPosCons + _startTimeCons + _endTimeCons + _feeCons;
-    qDebug() << command;
+//    qDebug() << command;
 
     QSqlQuery query(db);
     auto isOk = query.exec(command);
@@ -92,10 +92,10 @@ void queryTableView::queryCommand(bool startPos, bool endPos, bool startTime, bo
 
     int count = 0;
     QStandardItem* item = NULL;
-    while(query.next()){
-        qDebug() << query.value(0) << query.value(1) << query.value(2) << query.value(3) << query.value(4) << query.value(5) << query.value(6);
+    while(query.next() && count < 1000){
+//        qDebug() << query.value(0) << query.value(1) << query.value(2) << query.value(3) << query.value(4) << query.value(5) << query.value(6);
 
-        qDebug() << QDateTime::fromSecsSinceEpoch(query.value(0).toInt());
+//        qDebug() << QDateTime::fromSecsSinceEpoch(query.value(0).toInt());
 
         item = new QStandardItem(QDateTime::fromSecsSinceEpoch(query.value(0).toInt()).toString("MM-dd  hh:mm:ss"));
         item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -130,7 +130,7 @@ void queryTableView::queryCommand(bool startPos, bool endPos, bool startTime, bo
     model->setHorizontalHeaderLabels(labels);
     this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    qDebug() << count;
+//    qDebug() << count;
 }
 
 queryTableView::~queryTableView()

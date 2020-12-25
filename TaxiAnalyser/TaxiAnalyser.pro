@@ -10,23 +10,38 @@ CONFIG += c++11
 
 SOURCES += \
     dataanalysisscene.cpp \
+    destinationtableview.cpp \
+    feebarchart.cpp \
+    feepiechart.cpp \
+    gridselectionview.cpp \
     main.cpp \
     mainwindow.cpp \
     mapview.cpp \
     predictduringview.cpp \
     querytableview.cpp \
-    taxiorder.cpp
+    revenuebarchart.cpp \
+    revenuepiechart.cpp \
+    traveltimebarchart.cpp \
+    traveltimepiechart.cpp
 
 HEADERS += \
     dataanalysisscene.h \
+    destinationtableview.h \
+    feebarchart.h \
+    feepiechart.h \
+    gridselectionview.h \
     mainwindow.h \
     mapview.h \
     predictduringview.h \
     querytableview.h \
-    taxiorder.h
+    revenuebarchart.h \
+    revenuepiechart.h \
+    traveltimebarchart.h \
+    traveltimepiechart.h
 
 FORMS += \
     dataanalysisscene.ui \
+    gridselectionview.ui \
     mainwindow.ui \
     mapview.ui \
     predictduringview.ui \

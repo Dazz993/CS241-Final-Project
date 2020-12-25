@@ -26,9 +26,11 @@ public:
     QBarCategoryAxis * barAxisX = NULL;
     QValueAxis * barAxisY = NULL;
 
+    QString result;
+
     ~predictDuringView();
 
-    void predictDuringTime(bool useDepatureTime, double dlat, double dlng, double elat, double elng, QDateTime departureTime);
+    void predictDuringTime(bool useDepatureTime, double dlat, double dlng, double elat, double elng, QTime departureTime);
 private:
     Ui::predictDuringView *ui;
 };

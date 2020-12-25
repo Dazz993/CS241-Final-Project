@@ -37,8 +37,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Didot&quot;;</string>
+        </property>
         <property name="text">
-         <string>Demand Patterns</string>
+         <string>Demmand
+Pattern</string>
         </property>
        </widget>
       </item>
@@ -50,10 +54,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Didot&quot;;</string>
+        </property>
         <property name="text">
          <string>Valuable
-Information
-</string>
+Information</string>
         </property>
        </widget>
       </item>
@@ -65,8 +71,11 @@ Information
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Didot&quot;;</string>
+        </property>
         <property name="text">
-         <string>...</string>
+         <string>Prediction</string>
         </property>
        </widget>
       </item>
@@ -78,8 +87,11 @@ Information
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Didot&quot;;</string>
+        </property>
         <property name="text">
-         <string>...</string>
+         <string>Query</string>
         </property>
        </widget>
       </item>
@@ -91,32 +103,45 @@ Information
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
-      <widget class="QWidget" name="page_1">
+      <widget class="QWidget" name="page_0">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTabWidget" name="tabWidget">
+         <widget class="QTabWidget" name="tabWidget_page0">
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="scene0_tab0">
            <attribute name="title">
             <string>Analysis in a Day</string>
            </attribute>
+           <widget class="QChartView" name="graphicsView_s0_t0_chartview">
+            <property name="geometry">
+             <rect>
+              <x>660</x>
+              <y>100</y>
+              <width>891</width>
+              <height>573</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>12</y>
-              <width>1561</width>
-              <height>38</height>
+              <y>10</y>
+              <width>1551</width>
+              <height>41</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_17">
-             <property name="sizeConstraint">
-              <enum>QLayout::SetMaximumSize</enum>
-             </property>
              <item>
               <widget class="QLabel" name="label_16">
                <property name="sizePolicy">
@@ -131,7 +156,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit_tag2_date">
+              <widget class="QDateEdit" name="dateEdit_s0_t0_date">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -182,12 +207,12 @@ Information
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Starting Time</string>
+                <string>Starting of Departure Time</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QTimeEdit" name="timeEdit_tag2_begin_time">
+              <widget class="QTimeEdit" name="timeEdit_s0_t0_starting_time">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -208,12 +233,12 @@ Information
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>End Time</string>
+                <string>End of Departure Time</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QTimeEdit" name="timeEdit_tag2_end_time">
+              <widget class="QTimeEdit" name="timeEdit_s0_t0_end_time">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -255,7 +280,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_tag2_timestep">
+              <widget class="QSpinBox" name="spinBox_s0_t0_timestep">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -293,7 +318,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_tag2_type">
+              <widget class="QComboBox" name="comboBox_s0_t0_type">
                <item>
                 <property name="text">
                  <string>Total orders in the grids</string>
@@ -312,7 +337,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="btn_tag2_analyse">
+              <widget class="QPushButton" name="pushButton_s0_t0_analyse">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -326,93 +351,67 @@ Information
              </item>
             </layout>
            </widget>
-           <widget class="QChartView" name="graphicsView">
+           <widget class="gridSelectionView" name="graphicsView_s0_t0_map">
             <property name="geometry">
              <rect>
-              <x>730</x>
+              <x>30</x>
               <y>60</y>
-              <width>851</width>
-              <height>621</height>
+              <width>602</width>
+              <height>614</height>
              </rect>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
             </property>
            </widget>
-           <widget class="QWidget" name="layoutWidget">
+           <widget class="QWidget" name="">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>660</x>
               <y>60</y>
-              <width>691</width>
-              <height>621</height>
+              <width>901</width>
+              <height>32</height>
              </rect>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
+            <layout class="QHBoxLayout" name="horizontalLayout_19">
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_19">
-               <item>
-                <widget class="QLabel" name="label_20">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Grid Filter</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_tag2_check_all">
-                 <property name="text">
-                  <string>Check All</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_tag2_check_none">
-                 <property name="text">
-                  <string>Check None</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_tag2_map">
+              <widget class="QLabel" name="label_20">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string>Grid Filter</string>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_s0_t0_check_all">
+               <property name="text">
+                <string>Check All</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_s0_t0_check_none">
+               <property name="text">
+                <string>Check None</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tab">
+          <widget class="QWidget" name="scene0_tab1">
            <attribute name="title">
             <string>Analysis in several Days</string>
            </attribute>
-           <widget class="QChartView" name="graphicsView_2">
+           <widget class="QChartView" name="graphicsView_s0_t1_chartview">
             <property name="geometry">
              <rect>
-              <x>730</x>
-              <y>60</y>
-              <width>851</width>
-              <height>621</height>
+              <x>660</x>
+              <y>100</y>
+              <width>891</width>
+              <height>571</height>
              </rect>
             </property>
            </widget>
@@ -420,9 +419,9 @@ Information
             <property name="geometry">
              <rect>
               <x>20</x>
-              <y>12</y>
+              <y>10</y>
               <width>1561</width>
-              <height>38</height>
+              <height>41</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -443,7 +442,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit_tag1_begin">
+              <widget class="QDateEdit" name="dateEdit_s0_t1_start_date">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -499,7 +498,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit_tag1_end">
+              <widget class="QDateEdit" name="dateEdit_s0_t1_end_date">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -546,7 +545,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="spinBox_tag1_timestep">
+              <widget class="QSpinBox" name="spinBox_s0_t1_timestep">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -584,7 +583,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_tag1_type">
+              <widget class="QComboBox" name="comboBox_s0_t1_type">
                <item>
                 <property name="text">
                  <string>Total orders in the grids</string>
@@ -603,7 +602,7 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="btn_analyse">
+              <widget class="QPushButton" name="pushButton_s0_t1_analyse">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -617,78 +616,68 @@ Information
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="layoutWidget">
+           <widget class="QWidget" name="layoutWidget_7">
             <property name="geometry">
              <rect>
-              <x>20</x>
+              <x>660</x>
               <y>60</y>
-              <width>691</width>
-              <height>621</height>
+              <width>901</width>
+              <height>32</height>
              </rect>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
+            <layout class="QHBoxLayout" name="horizontalLayout_29">
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="label_5">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Grid Filter</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_check_all">
-                 <property name="text">
-                  <string>Check All</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_check_none">
-                 <property name="text">
-                  <string>Check None</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QLabel" name="label_tag1_map">
+              <widget class="QLabel" name="label_24">
                <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string>Grid Filter</string>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_s0_t1_check_all">
+               <property name="text">
+                <string>Check All</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_s0_t1_check_none">
+               <property name="text">
+                <string>Check None</string>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="gridSelectionView" name="graphicsView_s0_t1_map">
+            <property name="geometry">
+             <rect>
+              <x>30</x>
+              <y>60</y>
+              <width>602</width>
+              <height>614</height>
+             </rect>
+            </property>
            </widget>
           </widget>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_2">
+      <widget class="QWidget" name="page_1">
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QTabWidget" name="tabWidget_scene2_tab1">
+         <widget class="QTabWidget" name="tabWidget_page1">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
-          <widget class="QWidget" name="tab_3">
+          <widget class="QWidget" name="scene1_tab0">
            <attribute name="title">
             <string>Tab 1</string>
            </attribute>
@@ -712,7 +701,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="dateEdit_scene2_date">
+               <widget class="QDateEdit" name="dateEdit_s1_t0_date">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -768,7 +757,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit_scene2_begin_time">
+               <widget class="QTimeEdit" name="timeEdit_s1_t0_starting_time">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -794,7 +783,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit_scene2_end_time">
+               <widget class="QTimeEdit" name="timeEdit_s1_t0_end_time">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -836,7 +825,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox_scene2_timestep">
+               <widget class="QSpinBox" name="spinBox_s1_t0_timestep">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -864,7 +853,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btn_scene2_analyse">
+               <widget class="QPushButton" name="pushButton_s1_t0_analyse">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -881,27 +870,27 @@ Information
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QChartView" name="graphicsView_3"/>
+               <widget class="travelTimeBarChart" name="graphicsView_s1_t0_barchart"/>
               </item>
               <item>
-               <widget class="QChartView" name="graphicsView_4"/>
+               <widget class="travelTimePieChart" name="graphicsView_s1_t0_piechart"/>
               </item>
              </layout>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_4">
+          <widget class="QWidget" name="scene1_tab1">
            <attribute name="title">
-            <string>Tab 2</string>
+            <string>页</string>
            </attribute>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_21">
+             <layout class="QHBoxLayout" name="horizontalLayout_32">
               <property name="sizeConstraint">
                <enum>QLayout::SetMaximumSize</enum>
               </property>
               <item>
-               <widget class="QLabel" name="label_32">
+               <widget class="QLabel" name="label_36">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -914,7 +903,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QDateEdit" name="dateEdit_scene2_date_2">
+               <widget class="QDateEdit" name="dateEdit_s1_t1_date">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -957,7 +946,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_33">
+               <widget class="QLabel" name="label_37">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -970,7 +959,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit_scene2_begin_time_2">
+               <widget class="QTimeEdit" name="timeEdit_s1_t1_starting_time">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -983,7 +972,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_34">
+               <widget class="QLabel" name="label_38">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -996,7 +985,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QTimeEdit" name="timeEdit_scene2_end_time_2">
+               <widget class="QTimeEdit" name="timeEdit_s1_t1_end_time">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1025,7 +1014,7 @@ Information
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_35">
+               <widget class="QLabel" name="label_39">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1033,40 +1022,28 @@ Information
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>Time Period for Revenue statistics</string>
+                 <string>Fee Span</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox_scene2_n_parts">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="suffix">
-                 <string> minutes</string>
-                </property>
+               <widget class="QDoubleSpinBox" name="doubleSpinBox_s1_t1_feespan">
                 <property name="minimum">
-                 <number>30</number>
+                 <double>0.500000000000000</double>
                 </property>
                 <property name="maximum">
-                 <number>120</number>
+                 <double>2.500000000000000</double>
                 </property>
                 <property name="singleStep">
-                 <number>30</number>
+                 <double>0.500000000000000</double>
                 </property>
                 <property name="value">
-                 <number>60</number>
-                </property>
-                <property name="displayIntegerBase">
-                 <number>10</number>
+                 <double>1.000000000000000</double>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btn_scene2_analyse_2">
+               <widget class="QPushButton" name="pushButton_s1_t1_analyse">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1081,62 +1058,296 @@ Information
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QChartView" name="graphicsView_6"/>
+               <widget class="feeBarChart" name="graphicsView_s1_t1_barchart"/>
               </item>
               <item>
-               <widget class="QChartView" name="graphicsView_5"/>
+               <widget class="feePieChart" name="graphicsView_s1_t1_piechart"/>
               </item>
              </layout>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="scene1_tab2">
+           <attribute name="title">
+            <string>Tab 2</string>
+           </attribute>
+           <widget class="QLabel" name="label_s1_t2_total_revenue">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>60</y>
+              <width>771</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string>Total revenue of the chosen time period :</string>
+            </property>
+           </widget>
+           <widget class="QWidget" name="">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>12</y>
+              <width>1551</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_21">
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMaximumSize</enum>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_32">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Date</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="dateEdit_s1_t2_date">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="frame">
+                <bool>true</bool>
+               </property>
+               <property name="minimumDateTime">
+                <datetime>
+                 <hour>0</hour>
+                 <minute>0</minute>
+                 <second>0</second>
+                 <year>2016</year>
+                 <month>11</month>
+                 <day>1</day>
+                </datetime>
+               </property>
+               <property name="maximumDate">
+                <date>
+                 <year>2016</year>
+                 <month>11</month>
+                 <day>15</day>
+                </date>
+               </property>
+               <property name="minimumDate">
+                <date>
+                 <year>2016</year>
+                 <month>11</month>
+                 <day>1</day>
+                </date>
+               </property>
+               <property name="currentSection">
+                <enum>QDateTimeEdit::YearSection</enum>
+               </property>
+               <property name="displayFormat">
+                <string>yyyy-M-d</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_33">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Starting of Departure Time</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_s1_t2_starting_time">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="displayFormat">
+                <string>hh:mm</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_34">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>End of Departure Time</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_s1_t2_end_time">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="currentSection">
+                <enum>QDateTimeEdit::HourSection</enum>
+               </property>
+               <property name="displayFormat">
+                <string>hh:mm</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>false</bool>
+               </property>
+               <property name="timeSpec">
+                <enum>Qt::LocalTime</enum>
+               </property>
+               <property name="time">
+                <time>
+                 <hour>12</hour>
+                 <minute>0</minute>
+                 <second>0</second>
+                </time>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_35">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Time Period for Revenue statistics</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinBox_s1_t2_timestep">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="suffix">
+                <string> minutes</string>
+               </property>
+               <property name="minimum">
+                <number>30</number>
+               </property>
+               <property name="maximum">
+                <number>120</number>
+               </property>
+               <property name="singleStep">
+                <number>30</number>
+               </property>
+               <property name="value">
+                <number>60</number>
+               </property>
+               <property name="displayIntegerBase">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_s1_t2_analyse">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Analyse</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="revenueBarChart" name="graphicsView_s1_t2_barchart">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>100</y>
+              <width>771</width>
+              <height>561</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="revenuePieChart" name="graphicsView_s1_t2_piechart">
+            <property name="geometry">
+             <rect>
+              <x>800</x>
+              <y>60</y>
+              <width>771</width>
+              <height>601</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
          </widget>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_3">
+      <widget class="QWidget" name="page_2">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QTabWidget" name="tabWidget_2">
+         <widget class="QTabWidget" name="tabWidget_page2">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
-          <widget class="QWidget" name="tab_5">
+          <widget class="QWidget" name="scene2_tab0">
            <attribute name="title">
             <string>Tab 1</string>
            </attribute>
-           <widget class="mapView" name="graphicsView_8">
+           <widget class="mapView" name="graphicsView_s2_t0_map">
             <property name="geometry">
              <rect>
               <x>50</x>
-              <y>70</y>
+              <y>60</y>
               <width>602</width>
               <height>611</height>
              </rect>
             </property>
            </widget>
-           <widget class="predictDuringView" name="graphicsView_9">
+           <widget class="predictDuringView" name="graphicsView_s2_t0_barchart">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>160</y>
+              <x>670</x>
+              <y>150</y>
               <width>861</width>
-              <height>531</height>
+              <height>521</height>
              </rect>
             </property>
            </widget>
-           <widget class="QLabel" name="label_7">
+           <widget class="QLabel" name="label_s2_t0_time_cost">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>120</y>
-              <width>851</width>
-              <height>31</height>
+              <x>670</x>
+              <y>100</y>
+              <width>861</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="frameShape">
@@ -1181,7 +1392,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat_2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t0_depa_lat">
                  <property name="suffix">
                   <string>° N</string>
                  </property>
@@ -1200,7 +1411,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon_2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t0_depa_lon">
                  <property name="suffix">
                   <string>° E</string>
                  </property>
@@ -1236,7 +1447,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat_2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t0_end_lat">
                  <property name="suffix">
                   <string>° N</string>
                  </property>
@@ -1255,7 +1466,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon_2">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t0_end_lon">
                  <property name="suffix">
                   <string>° E</string>
                  </property>
@@ -1278,7 +1489,7 @@ Information
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_13">
                <item>
-                <widget class="QCheckBox" name="checkBox_use_depa_time_2">
+                <widget class="QCheckBox" name="checkBox_s2_t0_use_depa_time">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -1294,23 +1505,16 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDateTimeEdit" name="dateTimeEdit_3">
-                 <property name="date">
-                  <date>
-                   <year>2016</year>
-                   <month>11</month>
-                   <day>1</day>
-                  </date>
-                 </property>
+                <widget class="QTimeEdit" name="timeEdit_s2_t0_depa_time">
                  <property name="displayFormat">
-                  <string>yyyy/M/d hh:mm</string>
+                  <string>hh:mm</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_query_predict_1">
+              <widget class="QPushButton" name="pushButton_s2_t0_predict">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1327,15 +1531,15 @@ Information
            <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>70</y>
+              <x>670</x>
+              <y>60</y>
               <width>888</width>
               <height>41</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_11">
              <item>
-              <widget class="QLabel" name="label_start_pixmap_1">
+              <widget class="QLabel" name="label_s2_t0_start_pixmap">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -1354,14 +1558,14 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_1">
+              <widget class="QRadioButton" name="radioButton_s2_t0_choose_depa">
                <property name="text">
                 <string>Use mouse to choose depature position</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_end_pixmap_1">
+              <widget class="QLabel" name="label_s2_t0_end_pixmap">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -1374,14 +1578,14 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_2">
+              <widget class="QRadioButton" name="radioButton_s2_t0_choose_end">
                <property name="text">
                 <string>Use mouse to choose end position</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_3">
+              <widget class="QRadioButton" name="radioButton_s2_t0_not_choose">
                <property name="text">
                 <string>Not use mouse to choose</string>
                </property>
@@ -1393,402 +1597,10 @@ Information
             </layout>
            </widget>
           </widget>
-          <widget class="QWidget" name="tab_6">
-           <attribute name="title">
-            <string>Tab 2</string>
-           </attribute>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>10</y>
-              <width>1531</width>
-              <height>84</height>
-             </rect>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_8">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_2">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBox_use_depa_pos">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Use depature position</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat">
-                 <property name="suffix">
-                  <string>° N</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>30.524000000000001</double>
-                 </property>
-                 <property name="maximum">
-                  <double>30.794000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon">
-                 <property name="suffix">
-                  <string>° E</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>103.909000000000006</double>
-                 </property>
-                 <property name="maximum">
-                  <double>104.221999999999994</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBox_use_end_pos">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Use end position</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat">
-                 <property name="suffix">
-                  <string>° N</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>30.524000000000001</double>
-                 </property>
-                 <property name="maximum">
-                  <double>30.794000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="2">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon">
-                 <property name="suffix">
-                  <string>° E</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>103.909000000000006</double>
-                 </property>
-                 <property name="maximum">
-                  <double>104.221999999999994</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>80</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <layout class="QGridLayout" name="gridLayout">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBox_use_depa_time">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Use depature time</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QDateTimeEdit" name="dateTimeEdit">
-                 <property name="date">
-                  <date>
-                   <year>2016</year>
-                   <month>11</month>
-                   <day>1</day>
-                  </date>
-                 </property>
-                 <property name="displayFormat">
-                  <string>yyyy/M/d hh:mm</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBox_use_end_time">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Use end time</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="QDateTimeEdit" name="dateTimeEdit_2">
-                 <property name="date">
-                  <date>
-                   <year>2016</year>
-                   <month>11</month>
-                   <day>1</day>
-                  </date>
-                 </property>
-                 <property name="time">
-                  <time>
-                   <hour>0</hour>
-                   <minute>0</minute>
-                   <second>7</second>
-                  </time>
-                 </property>
-                 <property name="displayFormat">
-                  <string>yyyy/M/d hh:mm</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>80</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QCheckBox" name="checkBox_use_fee">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Use fee</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox_fee">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="suffix">
-                    <string/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_6">
-                 <item>
-                  <widget class="QLabel" name="label_similarity">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Similarity level</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBox_similarity">
-                   <item>
-                    <property name="text">
-                     <string>High</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Middle</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Low</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>80</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_query_similiar_orders">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>QUERY</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="queryTableView" name="listView">
-            <property name="geometry">
-             <rect>
-              <x>690</x>
-              <y>90</y>
-              <width>841</width>
-              <height>621</height>
-             </rect>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-           <widget class="mapView" name="graphicsView_7">
-            <property name="geometry">
-             <rect>
-              <x>50</x>
-              <y>90</y>
-              <width>602</width>
-              <height>611</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
-          <widget class="QWidget" name="tab_9">
+          <widget class="QWidget" name="scene2_tab1">
            <attribute name="title">
             <string>页</string>
            </attribute>
-           <widget class="QLabel" name="label_11">
-            <property name="geometry">
-             <rect>
-              <x>680</x>
-              <y>120</y>
-              <width>851</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="text">
-             <string>Time cost from the origin to the destination:</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::RichText</enum>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-           </widget>
-           <widget class="predictDuringView" name="graphicsView_13">
-            <property name="geometry">
-             <rect>
-              <x>680</x>
-              <y>160</y>
-              <width>861</width>
-              <height>531</height>
-             </rect>
-            </property>
-           </widget>
            <widget class="QWidget" name="layoutWidget_5">
             <property name="geometry">
              <rect>
@@ -1815,7 +1627,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat_5">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t1_depa_lat">
                  <property name="suffix">
                   <string>° N</string>
                  </property>
@@ -1834,7 +1646,7 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon_5">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s2_t1_depa_lon">
                  <property name="suffix">
                   <string>° E</string>
                  </property>
@@ -1857,7 +1669,7 @@ Information
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_30">
                <item>
-                <widget class="QCheckBox" name="checkBox_use_depa_time_5">
+                <widget class="QCheckBox" name="checkBox_s2_t1_use_depa_time">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -1873,23 +1685,16 @@ Information
                 </widget>
                </item>
                <item>
-                <widget class="QDateTimeEdit" name="dateTimeEdit_7">
-                 <property name="date">
-                  <date>
-                   <year>2016</year>
-                   <month>11</month>
-                   <day>1</day>
-                  </date>
-                 </property>
+                <widget class="QTimeEdit" name="timeEdit_s2_t1_depa_time">
                  <property name="displayFormat">
-                  <string>yyyy/M/d hh:mm</string>
+                  <string>hh:mm</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_query_predict_destination">
+              <widget class="QPushButton" name="pushButton_s2_t1_predict_destination">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1906,15 +1711,15 @@ Information
            <widget class="QWidget" name="layoutWidget_6">
             <property name="geometry">
              <rect>
-              <x>680</x>
-              <y>70</y>
+              <x>670</x>
+              <y>60</y>
               <width>888</width>
               <height>41</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_31">
              <item>
-              <widget class="QLabel" name="label_start_pixmap_3">
+              <widget class="QLabel" name="label_s2_t1_start_pixmap">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -1933,14 +1738,14 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_7">
+              <widget class="QRadioButton" name="radioButton_s2_t1_choose">
                <property name="text">
                 <string>Use mouse to choose depature position</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_9">
+              <widget class="QRadioButton" name="radioButton_s2_t1_not_choose">
                <property name="text">
                 <string>Not use mouse to choose</string>
                </property>
@@ -1951,13 +1756,23 @@ Information
              </item>
             </layout>
            </widget>
-           <widget class="mapView" name="graphicsView_14">
+           <widget class="mapView" name="graphicsView_s2_t1_map">
             <property name="geometry">
              <rect>
               <x>50</x>
-              <y>70</y>
+              <y>60</y>
               <width>602</width>
               <height>611</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="destinationTableView" name="tableView_s2_t1">
+            <property name="geometry">
+             <rect>
+              <x>670</x>
+              <y>100</y>
+              <width>891</width>
+              <height>571</height>
              </rect>
             </property>
            </widget>
@@ -1966,14 +1781,14 @@ Information
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_4">
+      <widget class="QWidget" name="page_3">
        <layout class="QHBoxLayout" name="horizontalLayout_26">
         <item>
-         <widget class="QTabWidget" name="tabWidget_3">
+         <widget class="QTabWidget" name="tabWidget_page3">
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="tab_8">
+          <widget class="QWidget" name="scene3_tab0">
            <attribute name="title">
             <string>Tab 2</string>
            </attribute>
@@ -1990,7 +1805,7 @@ Information
              <item>
               <layout class="QGridLayout" name="gridLayout_3">
                <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBox_use_depa_pos_2">
+                <widget class="QCheckBox" name="checkBox_s3_t0_use_depa_pos">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2006,7 +1821,7 @@ Information
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat_4">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s3_t0_depa_lat">
                  <property name="suffix">
                   <string>° N</string>
                  </property>
@@ -2025,7 +1840,7 @@ Information
                 </widget>
                </item>
                <item row="0" column="2">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon_4">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s3_t0_depa_lon">
                  <property name="suffix">
                   <string>° E</string>
                  </property>
@@ -2044,7 +1859,7 @@ Information
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBox_use_end_pos_2">
+                <widget class="QCheckBox" name="checkBox_s3_t0_use_end_pos">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2060,7 +1875,7 @@ Information
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat_4">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s3_t0_end_lat">
                  <property name="suffix">
                   <string>° N</string>
                  </property>
@@ -2079,7 +1894,7 @@ Information
                 </widget>
                </item>
                <item row="1" column="2">
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon_4">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_s3_t0_end_lon">
                  <property name="suffix">
                   <string>° E</string>
                  </property>
@@ -2118,7 +1933,7 @@ Information
              <item>
               <layout class="QGridLayout" name="gridLayout_4">
                <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBox_use_depa_time_4">
+                <widget class="QCheckBox" name="checkBox_s3_t0_use_depa_time">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2134,7 +1949,7 @@ Information
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QDateTimeEdit" name="dateTimeEdit_5">
+                <widget class="QDateTimeEdit" name="dateTimeEdit_s3_t0_depa_time">
                  <property name="date">
                   <date>
                    <year>2016</year>
@@ -2148,7 +1963,7 @@ Information
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBox_use_end_time_2">
+                <widget class="QCheckBox" name="checkBox_s3_t0_use_end_time">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2164,7 +1979,7 @@ Information
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QDateTimeEdit" name="dateTimeEdit_6">
+                <widget class="QDateTimeEdit" name="dateTimeEdit_s3_t0_end_time">
                  <property name="date">
                   <date>
                    <year>2016</year>
@@ -2207,7 +2022,7 @@ Information
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
-                  <widget class="QCheckBox" name="checkBox_use_fee_2">
+                  <widget class="QCheckBox" name="checkBox_s3_t0_use_fee">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -2220,7 +2035,7 @@ Information
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="doubleSpinBox_fee_2">
+                  <widget class="QDoubleSpinBox" name="doubleSpinBox_s3_t0_fee">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -2250,7 +2065,7 @@ Information
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_similarity_2">
+                  <widget class="QComboBox" name="comboBox_s3_t0_similarity">
                    <item>
                     <property name="text">
                      <string>High</string>
@@ -2289,7 +2104,7 @@ Information
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_query_similiar_orders_2">
+              <widget class="QPushButton" name="pushButton_s3_t0_query_similiar_orders">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2303,13 +2118,13 @@ Information
              </item>
             </layout>
            </widget>
-           <widget class="queryTableView" name="listView_2">
+           <widget class="queryTableView" name="tableView_s3_t0_similar_orders">
             <property name="geometry">
              <rect>
               <x>690</x>
-              <y>90</y>
+              <y>140</y>
               <width>841</width>
-              <height>621</height>
+              <height>571</height>
              </rect>
             </property>
             <property name="sizePolicy">
@@ -2319,7 +2134,7 @@ Information
              </sizepolicy>
             </property>
            </widget>
-           <widget class="mapView" name="graphicsView_12">
+           <widget class="mapView" name="graphicsView_s3_t0_map">
             <property name="geometry">
              <rect>
               <x>50</x>
@@ -2329,237 +2144,18 @@ Information
              </rect>
             </property>
            </widget>
-          </widget>
-          <widget class="QWidget" name="tab_7">
-           <attribute name="title">
-            <string>Tab 1</string>
-           </attribute>
-           <widget class="mapView" name="graphicsView_10">
+           <widget class="QWidget" name="layoutWidget_9">
             <property name="geometry">
              <rect>
-              <x>50</x>
-              <y>70</y>
-              <width>602</width>
-              <height>611</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="predictDuringView" name="graphicsView_11">
-            <property name="geometry">
-             <rect>
-              <x>680</x>
-              <y>160</y>
-              <width>861</width>
-              <height>531</height>
-             </rect>
-            </property>
-           </widget>
-           <widget class="QLabel" name="label_8">
-            <property name="geometry">
-             <rect>
-              <x>680</x>
-              <y>120</y>
-              <width>851</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="text">
-             <string>Time cost from the origin to the destination:</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::RichText</enum>
-            </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-           </widget>
-           <widget class="QWidget" name="layoutWidget_2">
-            <property name="geometry">
-             <rect>
-              <x>20</x>
-              <y>10</y>
-              <width>1541</width>
-              <height>51</height>
-             </rect>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_14">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_15">
-               <item>
-                <widget class="QLabel" name="label_9">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Depature position</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lat_3">
-                 <property name="suffix">
-                  <string>° N</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>30.524000000000001</double>
-                 </property>
-                 <property name="maximum">
-                  <double>30.794000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_depa_lon_3">
-                 <property name="suffix">
-                  <string>° E</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>103.909000000000006</double>
-                 </property>
-                 <property name="maximum">
-                  <double>104.221999999999994</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_16">
-               <item>
-                <widget class="QLabel" name="label_10">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>End position</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lat_3">
-                 <property name="suffix">
-                  <string>° N</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>30.524000000000001</double>
-                 </property>
-                 <property name="maximum">
-                  <double>30.794000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="doubleSpinBox_end_lon_3">
-                 <property name="suffix">
-                  <string>° E</string>
-                 </property>
-                 <property name="decimals">
-                  <number>3</number>
-                 </property>
-                 <property name="minimum">
-                  <double>103.909000000000006</double>
-                 </property>
-                 <property name="maximum">
-                  <double>104.221999999999994</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.010000000000000</double>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_18">
-               <item>
-                <widget class="QCheckBox" name="checkBox_use_depa_time_3">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Use depature time</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDateTimeEdit" name="dateTimeEdit_4">
-                 <property name="date">
-                  <date>
-                   <year>2016</year>
-                   <month>11</month>
-                   <day>1</day>
-                  </date>
-                 </property>
-                 <property name="displayFormat">
-                  <string>yyyy/M/d hh:mm</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_query_predict_2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Predict</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="layoutWidget_3">
-            <property name="geometry">
-             <rect>
-              <x>680</x>
-              <y>70</y>
+              <x>690</x>
+              <y>90</y>
               <width>888</width>
               <height>41</height>
              </rect>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_22">
+            <layout class="QHBoxLayout" name="horizontalLayout_33">
              <item>
-              <widget class="QLabel" name="label_start_pixmap_2">
+              <widget class="QLabel" name="label_s3_t0_start_pixmap">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -2578,14 +2174,14 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_4">
+              <widget class="QRadioButton" name="radioButton_s3_t0_choose_depa">
                <property name="text">
                 <string>Use mouse to choose depature position</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_end_pixmap_2">
+              <widget class="QLabel" name="label_s3_t0_end_pixmap">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -2598,14 +2194,14 @@ Information
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_5">
+              <widget class="QRadioButton" name="radioButton_s3_t0_choose_end">
                <property name="text">
                 <string>Use mouse to choose end position</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton_1_6">
+              <widget class="QRadioButton" name="radioButton_s3_t0_not_choose">
                <property name="text">
                 <string>Not use mouse to choose</string>
                </property>
@@ -2657,6 +2253,46 @@ Information
    <class>predictDuringView</class>
    <extends>QGraphicsView</extends>
    <header location="global">predictduringview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>gridSelectionView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">gridselectionview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>travelTimeBarChart</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">traveltimebarchart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>travelTimePieChart</class>
+   <extends>QGraphicsView</extends>
+   <header>traveltimepiechart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>feeBarChart</class>
+   <extends>QGraphicsView</extends>
+   <header>feebarchart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>feePieChart</class>
+   <extends>QGraphicsView</extends>
+   <header>feepiechart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>revenueBarChart</class>
+   <extends>QGraphicsView</extends>
+   <header>revenuebarchart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>revenuePieChart</class>
+   <extends>QGraphicsView</extends>
+   <header>revenuepiechart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>destinationTableView</class>
+   <extends>QTableView</extends>
+   <header>destinationtableview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

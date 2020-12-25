@@ -38,10 +38,10 @@ public:
     explicit DataAnalysisScene(QWidget *parent = nullptr);
     ~DataAnalysisScene();
 
-    // Parameters definition
-    bool feeSelected;
-    int beginDayLoaded;
-    int endDayLoaded;
+//     Parameters definition
+//    bool feeSelected;
+//    int beginDayLoaded;
+//    int endDayLoaded;
 
     QChart * splineChart = NULL;
     QDateTimeAxis * splineAxisX = NULL;
@@ -52,51 +52,71 @@ public:
     QBarCategoryAxis * barAxisX = NULL;
     QValueAxis * barAxisY = NULL;
 
-    QChart * travelTimeChart = NULL;
-    QBarSeries * travelTimeSeries = NULL;
-    QBarCategoryAxis * travelTimeAxisX = NULL;
-    QValueAxis * travelTimeAxisY = NULL;
+//    QChart * travelTimeChart = NULL;
+//    QBarSeries * travelTimeSeries = NULL;
+//    QBarCategoryAxis * travelTimeAxisX = NULL;
+//    QValueAxis * travelTimeAxisY = NULL;
 
-    QLabel * mapLabel = NULL;
+//    QLabel * mapLabel = NULL;
 
-    QLabel * iconLabel[100];
+//    QLabel * iconLabel[100];
 
-    QSqlDatabase db;
+//    QSqlDatabase db;
 
-    void initValues();
-    void initMapLabels();
-    void enableMapLabels();
-    void disableMapLabels();
+//    void initValues();
+//    void initMapLabels();
+//    void enableMapLabels();
+//    void disableMapLabels();
 
-    void displayInSplineChart();
+
     void displayInBarChart();
-    void preLoadNumOfOrders();
+    void displayInSplineChart();
+//    void preLoadNumOfOrders();
 
-    void analyseTravelTime();
-    void analyseFee();
-    void analyseRevenue();
+//    void analyseTravelTime();
+//    void analyseFee();
+//    void analyseRevenue();
 
-    void querySimilarOrders();
+//    void querySimilarOrders();
 
-    void setDayRange();
+//    void setDayRange();
 
-    QPixmap pixmap_choosen;
-    QPixmap pixmap_not_choosen;
-    QPixmap map;
+//    QPixmap pixmap_choosen;
+//    QPixmap pixmap_not_choosen;
+//    QPixmap map;
 
     QPixmap startPixmap;
     QPixmap endPixmap;
 
-    static QDateTime unixTimeToTime(int uTime);
-    static int timeToUnixTime(int day, int hour = 0, int min = 0, int second = 0);
+//    static QDateTime unixTimeToTime(int uTime);
+//    static int timeToUnixTime(int day, int hour = 0, int min = 0, int second = 0);
 
-    bool event(QEvent *e);
+////    bool event(QEvent *e);
 
-    int numOfBeginOrdersPerGridPerHour[100][2 * 24 * 15];
-    int numOfEndOrdersPerGridPerHour[100][2 * 24 * 15];
+//    void initWidgets();
 
 
-    void initWidgets();
+
+    // Flags or parameters
+    bool feeSelected;
+    QDate beginDayLoaded;
+    QDate endDayLoaded;
+
+    // Data
+    int numOfBeginOrdersPerGridPerHalfHour[100][2 * 24 * 15];
+    int numOfEndOrdersPerGridPerHalfHour[100][2 * 24 * 15];
+
+
+    // Front end initialization
+    void initFrontEndAndConnection();
+    void initAnalyseOrderDemandPatternInADay();
+    void initAnalyseOrderDemandPatternInSeveralDays();
+    void initAnalyseDistributionOfTravelTime();
+    void initAnalyseDistributionOfFee();
+    void initAnalyseDistributionOfRevenue();
+    void initPredictTravelTime();
+    void initPredictDestination();
+    void initQuerySimilarOrders();
 private:
     Ui::DataAnalysisScene *ui;
 };

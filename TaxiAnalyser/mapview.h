@@ -11,7 +11,9 @@
 #include <QLabel>
 #include <QLinearGradient>
 #include <QRadialGradient>
-
+#include <QDateTime>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 namespace Ui {
 class mapView;
@@ -20,6 +22,11 @@ class mapView;
 class mapView : public QGraphicsView
 {
     Q_OBJECT
+
+public:
+    explicit mapView(QWidget *parent = nullptr);
+    ~mapView();
+
     struct Point
     {
         int posX;
@@ -27,10 +34,6 @@ class mapView : public QGraphicsView
         int radius;
         int count;
     };
-
-public:
-    explicit mapView(QWidget *parent = nullptr);
-    ~mapView();
 
     void displayMap();
     void initStartEndPointPixmap();
@@ -60,6 +63,7 @@ public:
     QGraphicsPixmapItem * item;
     QGraphicsScene * mapScene;
 
+    QSqlDatabase db;
     QPixmap startPixmap;
     QPixmap endPixmap;
 
@@ -72,13 +76,19 @@ public:
     int ImgWidth;
     int ImgHeight;
     int _maxCount=1;
+    int _totalCount = 0;
+    int _maxPosX;
+    int _maxPosY;
     int *_countTable;
+    bool *_flagTable;
 
     QList<Point> _posList;
+    QList<Point> _resList;
     QImage _dataImg;
     QImage _heatImg;
     QRgb _colorList[256];
 
+    void addData(double lat, double lng, bool use_depature_time, QTime depature_time);
 signals:
     void startPosChanged(double lat, double lng);
     void endPosChanged(double lab, double lng);

@@ -2,6 +2,7 @@
 #include "ui_mapview.h"
 #include <QDebug>
 #include <QPainter>
+#include <QSqlError>
 
 mapView::mapView(QWidget *parent) :
     QGraphicsView(parent),
@@ -45,8 +46,9 @@ void mapView::displayMap()
     ImgWidth = mapImage.width();
     ImgHeight = mapImage.height();
     _countTable = new int[ImgWidth * ImgHeight]();
+    _flagTable = new bool[ImgWidth * ImgHeight]();
 
-    qDebug() << "size:" << mapImage.width() << mapImage.height();
+//    qDebug() << "size:" << mapImage.width() << mapImage.height();
 
     // Construct item
     item = new QGraphicsPixmapItem(mapImage);
@@ -106,7 +108,7 @@ void mapView::initHeatMap()
 
 void mapView::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << "STATUS" << status << "POSITION:" << event->x() << event->y();
+//    qDebug() << "STATUS" << status << "POSITION:" << event->x() << event->y();
 
     int x = event->x();
     int y = event->y();
@@ -141,14 +143,60 @@ void mapView::displayHeatMap()
     this->viewport()->update();
 }
 
+void mapView::addData(double lat, double lng, bool use_depature_time,  QTime depature_time)
+{
+    clear();
+
+    double lonDelta = 0.02;
+    double latDelta = 0.04;
+    double timeDelta = 500;
+
+    QString _startPosCons, _startTimeCons;
+
+    _startPosCons = QString("blng > %1 AND blng < %2 AND blat > %3 AND blat < %4 ").arg(lng - lonDelta).arg(lng + lonDelta).arg(lat - latDelta).arg(lat + latDelta);
+
+    const int BASETIME = QDateTime(QDate(2016, 11, 1), QTime(0, 0)).toSecsSinceEpoch();
+    const int BASE_BEGIN = QDateTime(QDate(2016, 11, 1), depature_time).toSecsSinceEpoch() - BASETIME;
+
+    QString subitem1 = QString("((btime - %1) % 86400 > %2)").arg(BASETIME).arg(BASE_BEGIN - timeDelta);
+    QString subitem2 = QString("((btime - %1) % 86400 < %2)").arg(BASETIME).arg(BASE_BEGIN + timeDelta);
+
+    if(use_depature_time){
+        _startTimeCons = QString("AND %1 AND %2 ").arg(subitem1).arg(subitem2);
+    }
+
+    QString command = "select elng, elat from orders where " + _startPosCons + _startTimeCons;
+//    qDebug() << command;
+
+    QSqlQuery query(db);
+    auto isOk = query.exec(command);
+
+    if(!isOk){
+        qDebug() << "ERROR! " << query.lastError().text();
+    }
+
+    while(query.next()){
+//        qDebug() << "POINT" << query.value(0).toFloat() << query.value(1).toFloat();
+        double slon = query.value(0).toFloat(), slat = query.value(1).toFloat();
+        double sx = (576 - 24) / (104.222 - 103.909) * (slon - 103.909);
+        double sy = (588.0 - 23.0) / (30.524 - 30.794) * (slat - 30.794);
+        if(sx >= 0 && sx < ImgWidth && sy >= 0 && sy < ImgHeight){
+            addPoints(sx, sy, 1);
+        }
+    }
+}
+
+
 void mapView::addPoints(int x, int y, int count)
 {
     Point pt{x, y, radius, count};
-    _countTable[pt.posX + pt.posY * ImgWidth] = pt.count;
+    _countTable[pt.posX + pt.posY * ImgWidth] += pt.count;
     _posList.push_back(pt);
 
-    if(count > _maxCount){
-        _maxCount = count;
+    if(_countTable[pt.posX + pt.posY * ImgWidth] > _maxCount){
+        _maxCount = _countTable[pt.posX + pt.posY * ImgWidth];
+        _maxPosX = pt.posX;
+        _maxPosY = pt.posY;
     }
 }
 
@@ -163,13 +211,22 @@ void mapView::drawDataImg()
     for(int i=0;i<_posList.count();i++)
     {
         const Point &pt=_posList.at(i);
+        const int id = pt.posX + pt.posY * ImgWidth;
         //以最大次数来计算该点的权重
-        const uchar alpha=uchar(_countTable[pt.posX+pt.posY*ImgWidth]/max_count*255);
-        QRadialGradient gradient(pt.posX,pt.posY,pt.radius);
-        gradient.setColorAt(0,QColor(0,0,0,alpha));
-        gradient.setColorAt(1,QColor(0,0,0,0));
-        painter.setBrush(gradient);
-        painter.drawEllipse(QPointF(pt.posX,pt.posY),pt.radius,pt.radius);
+        if(!_flagTable[id]){
+            const uchar alpha=uchar(_countTable[id]/max_count*255);
+            QRadialGradient gradient(pt.posX,pt.posY,pt.radius);
+            gradient.setColorAt(0,QColor(0,0,0,alpha));
+            gradient.setColorAt(1,QColor(0,0,0,0));
+            painter.setBrush(gradient);
+            painter.drawEllipse(QPointF(pt.posX,pt.posY),pt.radius,pt.radius);
+            _flagTable[id] = true;
+
+//            qDebug() << "Calculating:" << _countTable[id];
+            Point tempPoint{pt.posX, pt.posY, pt.radius, _countTable[id]};
+            _resList.push_back(tempPoint);
+            _totalCount += _countTable[id];
+        }
     }
 }
 
@@ -194,8 +251,14 @@ void mapView::clear()
     _dataImg.fill(Qt::transparent);
     _heatImg.fill(Qt::transparent);
     _posList.clear();
+    _resList.clear();
     _maxCount=1;
-    memset(_countTable,0,ImgWidth*ImgHeight*sizeof(int));
+    _maxPosX = 0;
+    _maxPosY = 0;
+    _totalCount = 0;
+    memset(_countTable, 0, ImgWidth * ImgHeight*sizeof(int));
+    memset(_flagTable, 0, ImgWidth * ImgHeight*sizeof(bool));
+
     update();
 }
 
@@ -203,7 +266,7 @@ void mapView::paintEvent(QPaintEvent *event)
 {
     QGraphicsView::paintEvent(event);
     if(heatMapActivate){
-        qDebug() << "it's pressing!";
+//        qDebug() << "it's pressing!";
         QPainter p(this->viewport());
         p.drawImage(24, 24, _heatImg);
     }

@@ -17,11 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    // flags
     bool dirLoaded;
 
     QSqlDatabase db;                                    // Database
     QStringList filePathList;                           // List of the files
+
+    QThread * thread;
 
     DataAnalysisScene *dataScene = NULL;
 
@@ -29,8 +30,7 @@ public:
     void getFileNamesInDir();
     void loadFilesToDB();
 
-    void setProgressBar(int);
-
+    void clearDatabase();
 signals:
     void signalLoadFilesDone();
     void signalProgressBar(int);
